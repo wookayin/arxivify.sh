@@ -56,7 +56,7 @@ done
 # ASSUMES all figures are stored in "figures/" folder
 echo -e "${YELLOW}[*] Copying figures ...${RESET}"
 mkdir -p "$TARGET_DIR/figures"
-for f in `cat ${SOURCES} | sed -n -E 's|^.*{(\./){0,1}figures/(.*\.(pdf\|png))}.*$|\2|p'`; do \
+for f in `cat $TARGET_DIR/*.tex | sed -n -E 's|^.*{(\./){0,1}figures/(.*\.(pdf\|png))}.*$|\2|p'`; do \
     echo "    figures/$f"; \
     rsync -R "figures/$f" $TARGET_DIR/; \
 done

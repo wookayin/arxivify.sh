@@ -11,3 +11,7 @@ Usage:
 latexmk -pdf mypaper.pdf
 ./arxivify.sh mypaper.pdf
 ```
+
+See Also:
+
+https://github.com/google-research/arxiv-latex-cleaner

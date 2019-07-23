@@ -68,8 +68,16 @@ echo -e "${YELLOW}[*] Making zip archive and running a test build ...${RESET}"
 zip -r "$JOBNAME.zip" *
 
 # run a test build, and revoke if fails
-latexmk -nobibtex -pdf -pdflatex="pdflatex -interaction=nonstopmode" \
-    $JOBNAME > /dev/null || (rm -rf *.zip; exit 1;)
+try=0;
+until [ $try -ge 2 ]; do
+    latexmk -nobibtex -pdf -pdflatex="pdflatex -interaction=nonstopmode" $JOBNAME > /dev/null \
+        && success = 1 && break
+    try=$[$try+1]
+done
+if [ $success -ne 0 ]; then
+    echo "${RED}Test Build failed.${RESET}"
+    rm -rf *.zip; exit 1;
+fi
 
 echo -e "\n\n${GREEN}=== Done ===${RESET}"
 cd -

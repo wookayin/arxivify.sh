@@ -5,6 +5,7 @@
 
 TARGET="$1"
 TARGET_DIR="_arxiv"
+FIG_DIRNAME="figures"
 
 # source tex files
 SOURCES=$(ls *.tex)
@@ -55,10 +56,10 @@ done
 # copy figures (only that are included in the stripped tex)
 # ASSUMES all figures are stored in "figures/" folder
 echo -e "${YELLOW}[*] Copying figures ...${RESET}"
-mkdir -p "$TARGET_DIR/figures"
-for f in `cat $TARGET_DIR/*.tex | sed -n -E 's|^.*{(\./){0,1}figures/(.*\.(pdf\|png))}.*$|\2|p'`; do \
-    echo "    figures/$f"; \
-    rsync -R "figures/$f" $TARGET_DIR/; \
+mkdir -p "$TARGET_DIR/$FIG_DIRNAME"
+for f in `cat $TARGET_DIR/*.tex | sed -n -E "s|^.*{(\./){0,1}${FIG_DIRNAME}/(.*\.(pdf\|png\|jpg))}.*$|\2|p"`; do \
+    echo "    ${FIG_DIRNAME}/$f"; \
+    rsync -R "${FIG_DIRNAME}/$f" $TARGET_DIR/; \
 done
 
 cd $TARGET_DIR

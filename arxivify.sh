@@ -38,7 +38,7 @@ mkdir -p $TARGET_DIR/
 
 # copy resources and assets
 echo -e "${YELLOW}[*] Copying resources ...${RESET}"
-rsync --verbose -R ${SOURCES} *.sty *.bib $TARGET_DIR/
+rsync --verbose -R ${SOURCES} *.sty $TARGET_DIR/
 
 # copy generated bbl files
 cp -v ${TARGET/.pdf/.bbl} $TARGET_DIR/

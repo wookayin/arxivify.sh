@@ -8,8 +8,11 @@ and includes only relevant asset files in the zip archive.
 Usage:
 
 ```
-latexmk -pdf mypaper.pdf
+latexmk -pdf mypaper.tex
 ./arxivify.sh mypaper.pdf
+
+# or set figure directory name manually (default: "figures")
+FIG_DIRNAME="mydir" ./arxivify.sh mypaper.pdf
 ```
 
 See Also:

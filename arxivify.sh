@@ -5,7 +5,11 @@
 
 TARGET="$1"
 TARGET_DIR="_arxiv"
-FIG_DIRNAME="figures"
+
+# fig_dirname: name of the directory where all figures are in
+if [ -z "$FIG_DIRNAME" ]; then
+    FIG_DIRNAME="figures"
+fi
 
 # source tex files
 SOURCES=$(ls *.tex)
@@ -30,7 +34,7 @@ YELLOW="\033[0;33m"
 
 JOBNAME=${TARGET##*/}
 JOBNAME=${JOBNAME%.pdf}
-echo -e "${GREEN}JOBNAME: $JOBNAME${WHITE}\n"
+echo -e "${GREEN}JOBNAME: $JOBNAME\nFIG_DIRNAME: $FIG_DIRNAME${WHITE}\n"
 
 # die on error
 set -e
